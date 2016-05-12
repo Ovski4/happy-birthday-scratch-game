@@ -17,26 +17,50 @@ header {
 footer {
     height: 400px;
     background: url('images/colors.png') center no-repeat;
+    position: relative;
+    bottom: 100px;
 }
 
 canvas {
-    margin: 0 auto;
     border: solid 2px black;
     background: #fff;
     display: block;
-    margin: 20px 0;
+    margin: 20px auto;
 }
 
-p.info {
+div {
     text-align: center;
-    position: relative;
-    bottom: 225px;
 }
 
-p.lost {
+p#info {
     text-align: center;
     position: relative;
-    bottom: 310px;
+    bottom: 290px;
+}
+
+p#lost {
+    text-align: center;
+    position: relative;
+    bottom: 370px;
     color: firebrick;
     visibility: hidden;
+}
+
+.btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    color: #fff;
+    background-color: #1D6AAD;
+    border-color: #195d97;
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    background-color: #195d97;
 }
