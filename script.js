@@ -1,50 +1,95 @@
-var stage, shape;
-var x, y, listener, color;
+var stage,
+    shape,
+    x,
+    y,
+    listener,
+    startScratchedTime,
+    endScratchedTime,
+    totalScratchedTime = 0
+;
 
+/**
+ * Initialize components
+ */
 function init() {
-    stage = new createjs.Stage("test");
-    color = createjs.Graphics.getHSL(170, 50, 50);
-    var testImg = new createjs.Bitmap("https://pbs.twimg.com/profile_images/54789364/JPG-logo-highres.jpg");
-    testImg.image.onload = function() {
+    var canvas = document.getElementById("canvas");
+    stage = new createjs.Stage(canvas);
+    createjs.Touch.enable(stage);
+    createjs.Ticker.setFPS(24);
+
+    var picture = new createjs.Bitmap("images/cats.png");
+    picture.image.onload = function() {
         stage.update();
     };
-    shape = stage.addChild(testImg, new createjs.Shape());
-    shape.cache(0, 0, 600, 400);
-    fill();
-    stage.on("stagemousedown", startDraw, this);
 
-    function startDraw(evt) {
-        listener = stage.on("stagemousemove", draw, this);
-        stage.on("stagemouseup", endDraw, this);
-
-        x = evt.stageX-0.001; // offset so we draw an initial dot
-        y = evt.stageY-0.001;
-        draw(evt); // draw the initial dot
-    }
+    shape = stage.addChild(picture, new createjs.Shape());
+    addFullOverlay();
+    stage.on("stagemousedown", startRevealingOverlay, this);
 }
 
-function fill() {
-//shape.graphics.ss(4000,1).s(color).mt(50,50).lt(50, 50);
-    shape.graphics.beginFill("#ff0000").drawRect(0, 0, 200, 100);
+/**
+ * Start revealing the overlay
+ *
+ * @param evt
+ */
+function startRevealingOverlay(evt) {
+    var infoText = document.getElementsByClassName("info");
+    setTimeout(function() {
+        startScratchedTime = new Date();
+        console.log(startScratchedTime);
+        infoText[0].style.visibility = "hidden";
+    }, 700);
+
+    listener = stage.on("stagemousemove", revealOverlay, this);
+    stage.on("stagemouseup", endRevealOverlay, this);
+
+    x = evt.stageX-0.001;
+    y = evt.stageY-0.001;
+    revealOverlay(evt); // reveal a first circle to begin with
+}
+
+/**
+ * Create an overlay to hide the picture
+ * It will be erased by the user
+ */
+function addFullOverlay() {
+    shape.cache(0, 0, 360, 360);
+    shape.graphics.beginFill("#fff").drawRect(0, 0, 340, 340);
     shape.updateCache("source-over");
     shape.graphics.clear();
     stage.update();
 }
 
-function draw(evt) {
-    shape.graphics.ss(20,1).s(color).mt(x,y).lt(evt.stageX, evt.stageY);
-
-    // the composite operation is the secret sauce.
-    // we'll either draw or erase what the user drew.
+/**
+ * Reveal overlay
+ *
+ * @param evt
+ */
+function revealOverlay(evt) {
+    shape.graphics.ss(20,1).s('#000').mt(x,y).lt(evt.stageX, evt.stageY);
+    // we erase what the user is drawing
     shape.updateCache("destination-out");
-
     shape.graphics.clear();
     x = evt.stageX;
     y = evt.stageY;
     stage.update();
 }
 
-function endDraw(evt) {
+/**
+ * End reveal overlay
+ *
+ * @param evt
+ */
+function endRevealOverlay(evt) {
+    endScratchedTime = new Date();
+    var interval = endScratchedTime - startScratchedTime;
+    totalScratchedTime = interval + totalScratchedTime;
+    if (totalScratchedTime >= 3500) {
+        var lostText = document.getElementsByClassName("lost");
+        lostText[0].style.visibility = "visible";
+    }
+    console.log('Scratched for '+interval);
+    console.log('total for '+totalScratchedTime);
     stage.off("stagemousemove", listener);
     evt.remove();
 }

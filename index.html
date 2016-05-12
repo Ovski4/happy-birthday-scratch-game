@@ -2,15 +2,17 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Titre de la page</title>
         <link rel="stylesheet" href="styles.css">
         <script src="lib/createjs-2015.05.21.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body onload="init();">
-    <canvas id="test" width="500" height="300"></canvas><br>
-
-    <input type="radio" name="action" value="draw" checked> draw
-    <input type="radio" name="action" value="erase" id="erase"> erase
+        <header></header>
+        <canvas id="canvas" width="340" height="340"></canvas>
+        <p class="info">Grattez pour savoir<br> ce que vous avez gagné!<br> 4 images identiques,<br> et c'est cadeau!</p>
+        <p class="lost">Mince alors, vous avez perdu<br>Vous n'avez pas gagné ce chaton</p>
+        <footer></footer>
     </body>
 </html>
