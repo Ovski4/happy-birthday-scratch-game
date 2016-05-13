@@ -6,32 +6,15 @@ var stage,
     startScratchedTime,
     endScratchedTime,
     totalScratchedTime = 0,
-    step = 0
+    gameNumber = 0
 ;
 
-var configurations = [
-    {
-        imagePath: "images/cats.png",
-        lostMessage: "Mince alors, vous avez perdu<br>Vous n'avez pas gagné ce chaton"
-    },
-    {
-        imagePath: "images/banner.png",
-        lostMessage: "Ok c'est nul celui-ci"
-    },
-    {
-        imagePath: "http://csimg.webmarchand.com/srv/FR/2902932880014/T/340x340/C/FFFFFF/url/la-ville-lego-843-piaces.jpg",
-        lostMessage: "Lego!!!"
-    }
-];
+var games = configuration.games;
 
 document.getElementById("next").onclick = function() {
-    step++;
-    if (configurations.length === step+1) {
-        document.getElementById("next").style.visibility = "hidden";
-    }
-
+    gameNumber++;
     stage.removeAllChildren();
-    setStage(configurations[step]);
+    setStage(games[gameNumber]);
     stage.update();
 };
 
@@ -43,7 +26,7 @@ function init() {
     stage = new createjs.Stage(canvas);
     createjs.Touch.enable(stage);
     createjs.Ticker.setFPS(24);
-    setStage(configurations[0]);
+    setStage(games[0]);
 }
 
 /**
@@ -92,6 +75,7 @@ function startRevealingOverlay(evt) {
 function addFullOverlay() {
     document.getElementById("info").style.visibility = "visible";
     document.getElementById("lost").style.visibility = "hidden";
+    document.getElementById("next").style.visibility = "hidden";
     shape.cache(0, 0, 360, 360);
     shape.graphics.beginFill("#fff").drawRect(0, 0, 340, 340);
     shape.updateCache("source-over");
@@ -124,8 +108,10 @@ function endRevealOverlay(evt) {
     var interval = endScratchedTime - startScratchedTime;
     totalScratchedTime = interval + totalScratchedTime;
     if (totalScratchedTime >= 3500) {
-        var lostText = document.getElementById("lost");
-        lostText.style.visibility = "visible";
+        document.getElementById("lost").style.visibility = "visible";
+        if (games.length > gameNumber+1) {
+            document.getElementById("next").style.visibility = "visible";
+        }
     }
     stage.off("stagemousemove", listener);
     evt.remove();
