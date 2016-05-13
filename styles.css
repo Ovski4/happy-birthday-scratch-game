@@ -4,26 +4,29 @@
 }
 
 body {
+    background-image: url('images/background.png');
+    font-family: quenda, Arial, sans-serif;
     margin: 0;
     width: 100%;
-    font-family: quenda, Arial, sans-serif;
+    /*background-repeat: no-repeat;
+    background-position: 0px 100px;*/
 }
 
 header {
-    height: 250px;
     background: url('images/banner.png') center no-repeat;
+    height: 200px;
 }
 
 footer {
-    height: 400px;
-    background: url('images/colors.png') center no-repeat;
-    position: relative;
+    background: url('images/colors2.png') center no-repeat;
     bottom: 100px;
+    height: 340px;
+    position: relative;
 }
 
 canvas {
-    border: solid 2px black;
     background: #fff;
+    border: solid 2px #195d97;
     display: block;
     margin: 20px auto;
 }
@@ -33,32 +36,35 @@ div {
 }
 
 p#info {
-    text-align: center;
-    position: relative;
     bottom: 290px;
+    position: relative;
+    text-align: center;
 }
 
 p#lost {
-    text-align: center;
-    position: relative;
     bottom: 370px;
     color: firebrick;
+    position: relative;
+    text-align: center;
+    visibility: hidden;
+}
+
+#next {
     visibility: hidden;
 }
 
 .btn {
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.3333333;
-    color: #fff;
     background-color: #1D6AAD;
     border-color: #195d97;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
     display: inline-block;
-    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.3333333;
+    padding: 10px 16px;
     text-align: center;
     touch-action: manipulation;
-    cursor: pointer;
-    border-radius: 3px;
 }
 
 .btn:hover {
