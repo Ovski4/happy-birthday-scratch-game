@@ -6,7 +6,7 @@ var stage,
     startScratchedTime,
     endScratchedTime,
     totalScratchedTime = 0,
-    step = 1
+    step = 0
 ;
 
 var configurations = [
@@ -17,17 +17,21 @@ var configurations = [
     {
         imagePath: "images/banner.png",
         lostMessage: "Ok c'est nul celui-ci"
+    },
+    {
+        imagePath: "http://csimg.webmarchand.com/srv/FR/2902932880014/T/340x340/C/FFFFFF/url/la-ville-lego-843-piaces.jpg",
+        lostMessage: "Lego!!!"
     }
 ];
 
 document.getElementById("next").onclick = function() {
     step++;
-    if (configurations.length === step) {
+    if (configurations.length === step+1) {
         document.getElementById("next").style.visibility = "hidden";
     }
 
     stage.removeAllChildren();
-    setStage(configurations[1]);
+    setStage(configurations[step]);
     stage.update();
 };
 
