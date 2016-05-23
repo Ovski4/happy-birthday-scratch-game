@@ -1,16 +1,16 @@
 var configuration = {
     games: [
         {
+            imagePath: "images/sushis.png",
+            lostMessage: "Ca alors,<br> ninja-sushis a mangé une boîte!<br> Il n'en manquait pourtant <br>qu'une seule pour gagner..."
+        },
+        {
+            imagePath: "images/radiateurs.png",
+            lostMessage: "C'est dommage,<br> vous aviez presque gagné le radiateur<br> pour avoir moins le cul gelé!"
+        },
+        {
             imagePath: "images/cats.png",
             lostMessage: "Mince alors, vous avez perdu<br>Vous n'avez pas gagné ce chaton"
-        },
-        {
-            imagePath: "images/banner.png",
-            lostMessage: "Ok c'est nul celui-ci"
-        },
-        {
-            imagePath: "http://csimg.webmarchand.com/srv/FR/2902932880014/T/340x340/C/FFFFFF/url/la-ville-lego-843-piaces.jpg",
-            lostMessage: "Lego!!!"
         }
     ]
 };

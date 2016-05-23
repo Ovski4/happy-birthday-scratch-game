@@ -42,11 +42,15 @@ p#info {
 }
 
 p#lost {
+    background: url('images/green-opacity.png');
     bottom: 370px;
-    color: firebrick;
+    color: #fff;
+    margin: 0 auto;
+    padding: 10px 0;
     position: relative;
     text-align: center;
     visibility: hidden;
+    width: 320px;
 }
 
 #next {

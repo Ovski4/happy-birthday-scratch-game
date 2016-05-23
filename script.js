@@ -13,6 +13,7 @@ var games = configuration.games;
 
 document.getElementById("next").onclick = function() {
     gameNumber++;
+    localStorage.setItem("gameNumber", gameNumber);
     stage.removeAllChildren();
     setStage(games[gameNumber]);
     stage.update();
@@ -26,7 +27,10 @@ function init() {
     stage = new createjs.Stage(canvas);
     createjs.Touch.enable(stage);
     createjs.Ticker.setFPS(24);
-    setStage(games[0]);
+    if (localStorage.getItem("gameNumber") !== null) {
+        gameNumber = Number(localStorage.getItem('gameNumber'));
+    }
+    setStage(games[gameNumber]);
 }
 
 /**
@@ -107,12 +111,23 @@ function endRevealOverlay(evt) {
     endScratchedTime = new Date();
     var interval = endScratchedTime - startScratchedTime;
     totalScratchedTime = interval + totalScratchedTime;
-    if (totalScratchedTime >= 3500) {
-        document.getElementById("lost").style.visibility = "visible";
-        if (games.length > gameNumber+1) {
-            document.getElementById("next").style.visibility = "visible";
-        }
-    }
+    //if (totalScratchedTime >= 3500) {
+        onImageDiscovered();
+    //}
     stage.off("stagemousemove", listener);
     evt.remove();
+}
+
+/**
+ * function called when the image is considered as discovered
+ */
+function onImageDiscovered()
+{
+    document.getElementById("lost").style.visibility = "visible";
+    console.log(games.length);
+    if (games.length > gameNumber+1) {
+        document.getElementById("next").style.visibility = "visible";
+    } else { // last element
+        localStorage.removeItem('gameNumber');
+    }
 }
