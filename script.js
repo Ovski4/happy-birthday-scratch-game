@@ -129,7 +129,7 @@ function endRevealOverlay(evt) {
     endScratchedTime = new Date();
     var interval = endScratchedTime - startScratchedTime;
     totalScratchedTime = interval + totalScratchedTime;
-    if (totalScratchedTime >= 3500) {
+    if (totalScratchedTime >= 4000) {
         onImageDiscovered();
     }
     stage.off("stagemousemove", listener);
