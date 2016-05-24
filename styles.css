@@ -41,16 +41,28 @@ p#info {
     text-align: center;
 }
 
-p#lost {
-    background: url('images/green-opacity.png');
+p#message {
+    background-image: url('images/light-blue-opacity.png');
     bottom: 370px;
     color: #fff;
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 10px 5px;
     position: relative;
     text-align: center;
     visibility: hidden;
-    width: 320px;
+    width: 310px;
+}
+
+p#message.winner {
+    bottom: 494px;
+    height: 290px;
+    padding-top: 20px;
+}
+
+p#message img {
+    width: 310px;
+    height: 200px;
+    margin-top: 20px;
 }
 
 #next {

@@ -39,7 +39,7 @@ function init() {
  * @param configuration
  */
 function setStage(configuration) {
-    document.getElementById("lost").innerHTML = configuration.lostMessage;
+    document.getElementById("message").innerHTML = configuration.message;
 
     totalScratchedTime = 0;
 
@@ -78,7 +78,7 @@ function startRevealingOverlay(evt) {
  */
 function addFullOverlay() {
     document.getElementById("info").style.visibility = "visible";
-    document.getElementById("lost").style.visibility = "hidden";
+    document.getElementById("message").style.visibility = "hidden";
     document.getElementById("next").style.visibility = "hidden";
     shape.cache(0, 0, 360, 360);
     shape.graphics.beginFill("#fff").drawRect(0, 0, 340, 340);
@@ -111,9 +111,9 @@ function endRevealOverlay(evt) {
     endScratchedTime = new Date();
     var interval = endScratchedTime - startScratchedTime;
     totalScratchedTime = interval + totalScratchedTime;
-    //if (totalScratchedTime >= 3500) {
+    if (totalScratchedTime >= 3500) {
         onImageDiscovered();
-    //}
+    }
     stage.off("stagemousemove", listener);
     evt.remove();
 }
@@ -123,8 +123,12 @@ function endRevealOverlay(evt) {
  */
 function onImageDiscovered()
 {
-    document.getElementById("lost").style.visibility = "visible";
-    console.log(games.length);
+    var configuration = games[gameNumber];
+    document.getElementById("message").style.visibility = "visible";
+    if (typeof configuration.class != 'undefined') {
+        document.getElementById("message").className = configuration.class;
+    }
+    document.getElementById("message").style.background = 'url("'+configuration.backgroundImagePath+'")';
     if (games.length > gameNumber+1) {
         document.getElementById("next").style.visibility = "visible";
     } else { // last element
