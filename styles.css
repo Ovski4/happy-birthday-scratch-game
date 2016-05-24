@@ -36,6 +36,10 @@ div {
     text-align: center;
 }
 
+#github-ribbon {
+
+}
+
 p#info {
     bottom: 290px;
     position: relative;
@@ -88,11 +92,17 @@ p#message img {
     background-color: #195d97;
 }
 
-.smartphone-info {
+.smartphone-info, #github-ribbon {
     display: none;
 }
 
+/* Desktop devices */
+
 @media (min-width: 768px) {
+    #github-ribbon {
+        display: block;
+    }
+
     .smartphone-info {
         display: block;
         position: absolute;
