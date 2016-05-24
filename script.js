@@ -23,6 +23,7 @@ document.getElementById("next").onclick = function() {
  * Initialize components
  */
 function init() {
+    preloadPictures();
     var canvas = document.getElementById("canvas");
     stage = new createjs.Stage(canvas);
     createjs.Touch.enable(stage);
@@ -31,6 +32,23 @@ function init() {
         gameNumber = Number(localStorage.getItem('gameNumber'));
     }
     setStage(games[gameNumber]);
+}
+
+/**
+ * Preload the pictures
+ */
+function preloadPictures() {
+    // preload configuration images
+    for (var i = 0; i < games.length; i++) {
+        var preloadedImage = new Image();
+        var preloadedBackgroundImage = new Image();
+        preloadedImage.src = games[i]['imagePath'];
+        preloadedBackgroundImage.src = games[i]['backgroundImagePath'];
+    }
+    //preload last gif
+    var preloadedGif = new Image();
+    preloadedGif.src = "images/leo.gif";
+
 }
 
 /**
