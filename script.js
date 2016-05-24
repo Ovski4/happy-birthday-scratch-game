@@ -13,7 +13,7 @@ var games = configuration.games;
 
 document.getElementById("next").onclick = function() {
     gameNumber++;
-    localStorage.setItem("gameNumber", gameNumber);
+    //localStorage.setItem("gameNumber", gameNumber);
     stage.removeAllChildren();
     setStage(games[gameNumber]);
     stage.update();
