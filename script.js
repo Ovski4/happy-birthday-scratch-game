@@ -19,6 +19,10 @@ document.getElementById("next").onclick = function() {
     stage.update();
 };
 
+document.getElementById("info").onclick = function() {
+    document.getElementById("info").style.visibility = "hidden";
+};
+
 /**
  * Initialize components
  */
