@@ -1,6 +1,16 @@
 var configuration = {
     games: [
         {
+            imagePath: "images/dummies.png",
+            backgroundImagePath: "images/light-blue-opacity.png",
+            message: "Ouch, vous étiez à 2 doigts de gagner le livre de réparation de vélo pour les nuls..."
+        },
+        {
+            imagePath: "images/collants.png",
+            backgroundImagePath: "images/light-blue-opacity.png",
+            message: "Zut! Collants perdues...<br>Je suis sur que tu es très déçue.."
+        },
+        {
             imagePath: "images/sushis.png",
             backgroundImagePath: "images/orange-opacity.png",
             message: "Ca alors,<br> ninja-sushis a mangé une boîte!<br>Il n'en manquait pourtant <br>qu'une seule pour gagner..."
@@ -14,11 +24,6 @@ var configuration = {
             imagePath: "images/cats.png",
             backgroundImagePath: "images/orange-opacity.png",
             message: "Mince alors, vous avez perdu.<br>Cette mignonne boule de poils attendra"
-        },
-        {
-            imagePath: "images/collants.png",
-            backgroundImagePath: "images/light-blue-opacity.png",
-            message: "Zut! Collants perdues...<br>Je suis sur que tu es très déçue.."
         },
         {
             imagePath: "images/disney.png",
