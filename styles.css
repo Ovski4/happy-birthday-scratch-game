@@ -20,7 +20,7 @@ header {
 
 footer {
     background: url('images/colors.png') center no-repeat;
-    bottom: 100px;
+    bottom: 350px;
     height: 340px;
     position: relative;
 }
@@ -41,14 +41,39 @@ div {
 }
 
 p#info {
-    bottom: 290px;
+    color: #fff;
+    width: 280px;
+    margin: 0 auto;
+    bottom: 390px;
+    padding: 20px;
     position: relative;
     text-align: center;
+    line-height: 280px;
+    background-image: url('images/light-blue-opacity.png');
+    height: 280px;
+}
+
+p#info > span.cancel {
+    display: block;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    bottom: 280px;
+    left: 235px;
+    background-image: url('images/cancel_white.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+p#info > span.text {
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
 }
 
 p#message {
     background-image: url('images/light-blue-opacity.png');
-    bottom: 370px;
+    bottom: 580px;
     color: #fff;
     margin: 0 auto;
     padding: 10px 5px;
@@ -59,7 +84,7 @@ p#message {
 }
 
 p#message.winner {
-    bottom: 494px;
+    bottom: 710px;
     height: 290px;
     padding-top: 20px;
 }
