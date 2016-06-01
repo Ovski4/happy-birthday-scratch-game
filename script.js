@@ -2,7 +2,8 @@ var stage,
     shape,
     x,
     y,
-    listener,
+    listenerMouseMove,
+    listenerMouseDown,
     startScratchedTime,
     endScratchedTime,
     totalScratchedTime = 0,
@@ -21,6 +22,8 @@ document.getElementById("next").onclick = function() {
 
 document.getElementById("info").onclick = function() {
     document.getElementById("info").style.visibility = "hidden";
+    x = undefined;
+    y = undefined;
 };
 
 /**
@@ -61,6 +64,8 @@ function preloadPictures() {
  * @param configuration
  */
 function setStage(configuration) {
+    x = undefined;
+    y = undefined;
     document.getElementById("message").innerHTML = configuration.message;
 
     totalScratchedTime = 0;
@@ -72,7 +77,8 @@ function setStage(configuration) {
 
     shape = stage.addChild(picture, new createjs.Shape());
     addFullOverlay();
-    stage.on("stagemousedown", startRevealingOverlay, this);
+    stage.off("stagemousedown", listenerMouseDown);
+    listenerMouseDown = stage.on("stagemousedown", startRevealingOverlay, this);
 }
 
 /**
@@ -82,15 +88,10 @@ function setStage(configuration) {
  */
 function startRevealingOverlay(evt) {
     startScratchedTime = new Date();
-    setTimeout(function() {
-        document.getElementById("info").style.visibility = "hidden";
-    }, 700);
 
-    listener = stage.on("stagemousemove", revealOverlay, this);
+    listenerMouseMove = stage.on("stagemousemove", revealOverlay, this);
     stage.on("stagemouseup", endRevealOverlay, this);
 
-    x = evt.stageX-0.001;
-    y = evt.stageY-0.001;
     revealOverlay(evt); // reveal a first circle to begin with
 }
 
@@ -103,7 +104,26 @@ function addFullOverlay() {
     document.getElementById("message").style.visibility = "hidden";
     document.getElementById("next").style.visibility = "hidden";
     shape.cache(0, 0, 360, 360);
-    shape.graphics.beginFill("#fff").drawRect(0, 0, 340, 340);
+    shape.graphics
+        .beginFill("#277fc1")
+        .drawRect(0, 0, 320, 320)
+        .beginFill("#f41d2b")
+        .drawRect(145, 0, 30, 320)
+        .drawRect(0, 145, 320, 30)
+    ;
+    var circleRowCount = 7;
+    for (var i = 0; i < circleRowCount; i++) {
+        var shift = (320/circleRowCount)/2;
+        if (i%2 == 0) {
+            shift = (320/circleRowCount);
+        }
+        for (var j = 0; j < circleRowCount; j++) {
+            i2 = i*(320/circleRowCount)+22;
+            j2 = j*(320/circleRowCount)+shift-15;
+            shape.graphics.beginFill("#f41d2b").drawCircle(i2, j2, 10);
+        }
+    }
+
     shape.updateCache("source-over");
     shape.graphics.clear();
     stage.update();
@@ -115,6 +135,13 @@ function addFullOverlay() {
  * @param evt
  */
 function revealOverlay(evt) {
+    // first circle
+    if (typeof x == 'undefined') {
+        x = evt.stageX-0.001;
+    }
+    if (typeof y == 'undefined') {
+        y = evt.stageY-0.001;
+    }
     shape.graphics.ss(20,1).s('#000').mt(x,y).lt(evt.stageX, evt.stageY);
     // we erase what the user is drawing
     shape.updateCache("destination-out");
@@ -130,13 +157,15 @@ function revealOverlay(evt) {
  * @param evt
  */
 function endRevealOverlay(evt) {
+    x = undefined;
+    y = undefined;
     endScratchedTime = new Date();
     var interval = endScratchedTime - startScratchedTime;
     totalScratchedTime = interval + totalScratchedTime;
     if (totalScratchedTime >= 4000) {
         onImageDiscovered();
     }
-    stage.off("stagemousemove", listener);
+    stage.off("stagemousemove", listenerMouseMove);
     evt.remove();
 }
 
