@@ -26,7 +26,12 @@ games: [
 
 That's pretty much it right now!
 
-Todo
-----
+How to run
+----------
 
-Allow more customization thanks the configuration.
+```bash
+docker run -p 8888:80 ovski/happy-birthday-scratch-game:latest
+```
+
+browse http://localhost:8888/
+
