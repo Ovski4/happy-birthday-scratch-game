@@ -3,7 +3,7 @@ Happy Birthday Scratch Game
 
 Wish your friend, cousin, lover or whoever you want an happy birthday like a pro!
 
-See http://happy-birthday.pro for a demo.
+See https://happy-birthday.bouchereau.pro for a demo.
 
 How to customize
 ----------------
